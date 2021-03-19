@@ -5,6 +5,8 @@
 - [Magic methods](#magic-methods)
 - [Class inheritance](#class-inheritance)
 - [Decorators](#decorators)
+- [Set up virtual environment](#set-up-virtual-environment)
+- [Upload Python package to Pypi and Test Pypi](#upload-python-package-to-pypi-and-test-pypi)
 
 ## Time
 
@@ -115,6 +117,7 @@ class Pants(Clothing):
 
 ## Decorators
 Source: https://realpython.com/primer-on-python-decorators/
+
 Example 1:
 ```python
 def my_decorator(func):
@@ -154,3 +157,40 @@ def do_twice(func):
         return func(*args, **kwargs)
     return wrapper_do_twice
 ```
+
+## Set up virtual environment
+
+With Conda:
+```
+conda create --name environmentname
+source activate environmentname
+conda install numpy
+```
+
+With Venv:
+```
+python3 -m venv environmentname
+source environmentname/bin/activate
+pip install numpy
+```
+
+## Upload Python package to Pypi and Test Pypi
+
+```
+cd packagefolder
+python setup.py sdist
+pip install twine
+
+# commands to upload to the pypi test repository
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+pip install --index-url https://test.pypi.org/simple/ packagename
+
+# command to upload to the pypi repository
+twine upload dist/*
+pip install packagename
+```
+
+More info:
+- https://packaging.python.org/tutorials/packaging-projects/ 
+- https://packaging.python.org/guides/distributing-packages-using-setuptools/
+
